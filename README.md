@@ -1,6 +1,7 @@
 # Portfolio Website Documentation
 
 # Table of Contents
+* Quick commands and steps for management: [Quick Reference](#quick-reference)
 * [Summary](#summary)
 
 ## Microsoft Azure Specific Sections
@@ -41,12 +42,21 @@
   * [Misc Events](#misc-events)
 * [HTML Sources](#html-sources)
 
+## Quick Reference
+Workflow goes like this:
+1. Dev in Visual Studio, from `C:\Users\R\Documents\GitHub\portfolio`.
+2. Push to GitHub repo `https://github.com/IndieDragoness/portfolio`.
+3. Go to the [Microsoft Azure Portal, Deployment Center](https://portal.azure.com/#@gtvault.onmicrosoft.com/resource/subscriptions/e52de545-f8f0-424a-9954-5a4d4aa548d2/resourceGroups/portfolio-app/providers/Microsoft.Web/sites/sages-portfolio/vstscd) and make sure you have a GitHub actions setup to automatically deploy the GitHub repo Master to the app.
+
 ## Summary
 The goal of this worksheet is to provide the steps to develop and maintain a Python Flask based portfolio
-website on Microsoft Azure's free cloud service/subdomain. The subdomain is `.azurewebsites.net` and while
+website on Microsoft Azure's free cloud service/subdomain. The subdomain is `<app_name>.azurewebsites.net` and while
 normally having your own domain name would be preferable, this subdomain confirms to viewers that the Azure
 service has been used. This demonstrates both my projects, but also my Microsoft Azure skills. In addition,
-doxygen can be used to connect this tutorials to others in a web format.
+doxygen can be used to connect this tutorials to others in a web format in combination with Markdown.
+
+When deploying a web app to Azure, Azure creates a `gunicorn` web server to serve your app. This looks for a file called
+`app.py` in your directory.
 
 ### Tools Involved in this Project
 1. Hosting/Cloud: [Microsoft Azure/Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
@@ -57,9 +67,11 @@ doxygen can be used to connect this tutorials to others in a web format.
   * [Mobile Version Design Video](https://www.youtube.com/watch?v=CORrv-qvfkU)
 5. HTML
 6. CSS
+7. venv for virtual python environments (testing): [venv](https://docs.python.org/3/library/venv.html)
 
 ## Sources
 * This page came from: [Microsoft Azure Quickstart for Python Flask](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask)
+* Deploying Flask: [Python Flask Deployment Options (including Azure)](https://flask.palletsprojects.com/en/master/deploying/)
 
 ## Setting up Initial Environment
 * Have an Azure account with an active subscription. Create an account for free.
@@ -80,8 +92,15 @@ started.
 Clone the sample repository using the following command and navigate into the sample folder.
 (Install [git](https://git-scm.com/downloads) if you don't have git already.)
 
+`git clone https://github.com/Azure-Samples/python-docs-hello-world`
+
 The sample contains framework-specific code that Azure App Service recognizes when starting the app.
 * [Container startup proces](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#container-startup-process)
+
+### Microsoft Azure Environment Variables
+If your application requires any Environment Variables, create equivalent [App Service application settings](https://docs.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings).
+These App Service settings appear to your code as environment variables, as described on [Access environment variables](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#access-app-settings-as-environment-variables).
+
 
 ## Run the Sample
 To run Azure's sample follow this procedure:
@@ -105,7 +124,7 @@ The app displays the message Hello, World!.
 
 In your terminal window, press Ctrl+C to exit the development server.
 
-## Deploy the Sample/The App
+## Deploy the App
 Deploy the code in your local folder (python-docs-hello-world) using the az webapp up command:
 * `az webapp up --sku FREE --name <app-name>`
 
@@ -429,17 +448,50 @@ Events triggered by medias like videos, images and audio (applies to all HTML el
 * [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
 * [JavaScript tutorial](https://www.w3schools.com/js/default.asp)
 
+## venv Lightweight Python Virtual Environment
+Source (check for updates): [venv documentation](https://docs.python.org/3/library/venv.html)
 
+The [venv](https://docs.python.org/3/library/venv.html#module-venv) module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories.
+Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.
 
+### Creating Virtual Environments
+Creation of [virtual environments]() is done by executing the command `venv`:
 
+```
+# Linux Version
+python3 -m venv /path/to/new/virtual/environment
+```
+```
+# Windows Version
+python -m venv c:\path\to\myenv
+```
 
+Running this command creates the target directory (creating any parent directories that don’t exist already) and places a `pyvenv.cfg` file in it with a home key pointing to the Python installation from which the command was run (a common name for the target directory is `.venv`).
+It also creates a bin (or Scripts on Windows) subdirectory containing a copy/symlink of the Python binary/binaries (as appropriate for the platform or arguments used at environment creation time).
+It also creates an (initially empty) `lib/pythonX.Y/site-packages` subdirectory (on Windows, this is `Lib\site-packages`).
+If an existing directory is specified, it will be re-used.
 
+The created `pyvenv.cfg` file also includes the `include-system-site-packages` key, set to true if `venv` is run with the `--system-site-packages` option, false otherwise.
+Unless the `--without-pip` option is given, `ensurepip` will be invoked to bootstrap `pip` into the virtual environment.
+Multiple paths can be given to `venv`, in which case an identical virtual environment will be created, according to the given options, at each provided path.
+Once a virtual environment has been created, it can be “activated” using a script in the virtual environment’s binary directory. The invocation of the script is platform-specific (<venv> must be replaced by the path of the directory containing the virtual environment):
 
+| Platform | Shell | Command to activate virtual environment |
+| POSIX | bash/zsh | `$ source <venv>/bin/activate` |
+| | fish | `$ source <venv>/bin/activate.fish` |
+| | csh/tcsh | `$ source <venv>/bin/activate.csh` |
+| | PowerShell Core | `$ <venv>/bin/Activate.ps1` |
+| Windows | cmd.exe | `C:\> <venv>\Scripts\activate.bat` |
+| | PowerShell | `PS C:\> <env>\Scripts\Activate.ps1` |
 
+When a virtual environment is active, the VIRTUAL_ENV environment variable is set to the path of the virtual environment.
+This can be used to check if one is running inside a virtual environment.
 
+You don’t specifically need to activate an environment; activation just prepends the virtual environment’s binary directory to your path, so that “python” invokes the virtual environment’s Python interpreter and you can run installed scripts without having to use their full path.
+However, all scripts installed in a virtual environment should be runnable without activating it, and run with the virtual environment’s Python automatically.
 
-
-
+You can deactivate a virtual environment by typing “deactivate” in your shell.
+The exact mechanism is platform-specific and is an internal implementation detail (typically a script or shell function will be used).
 
 
 
