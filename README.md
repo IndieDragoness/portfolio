@@ -20,6 +20,9 @@
 * [Troubleshooting Guide](#troubleshooting-guide)
 
 ## Python Flask Specific Sections
+* [Python Flask](#python-flask)
+  * [Error: Template Not Found](#template-not-found)
+  * [Error: Missing End of Comment Tag](#missing-end-of-comment-tag)
 
 ## CSS Specific Sections
 * [CSS Structures](#css-structures)
@@ -45,7 +48,7 @@
 ## Quick Reference
 Workflow goes like this:
 1. Dev in Visual Studio, from `C:\Users\R\Documents\GitHub\portfolio`.
-2. Push to GitHub repo `https://github.com/IndieDragoness/portfolio`.
+2. `Commit`, then `Push` to GitHub repo `https://github.com/IndieDragoness/portfolio`.
 3. Go to the [Microsoft Azure Portal, Deployment Center](https://portal.azure.com/#@gtvault.onmicrosoft.com/resource/subscriptions/e52de545-f8f0-424a-9954-5a4d4aa548d2/resourceGroups/portfolio-app/providers/Microsoft.Web/sites/sages-portfolio/vstscd) and make sure you have a GitHub actions setup to automatically deploy the GitHub repo Master to the app.
 
 ## Summary
@@ -204,6 +207,28 @@ The `--no-wait` argument allows the command to return before the operation is co
 
 ## Troubleshooting Guide
 The guide is [located here](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#troubleshooting).
+
+## Python Flask
+This portion of the `README` covers Python `Flask` steps. Python `Flask` is used by `Gunicorn` on Microsoft Azure to serve up the app.
+
+**Tips**
+* Store `.html` files in the `templates` folder.
+* Use `render_template` to render an entire `.html` page.
+* Use `{% raw %}` to escape any special characters that throw errors.
+
+### Template Not Found
+This error frequently popped up due to `.html` files being in the wrong place. By default, `Flask` looks in the `/templates` folder.
+
+### Missing End of Comment Tag
+This error frequently popped up due to special characters in the `.html` files. The Flask Template system required me to use the following
+to surround the special characters in the affect `.html` file:
+```
+{% raw %}Affected section of HTML{% endraw %}
+
+{% raw %}
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+{% endraw %}
+```
 
 ## CSS Structures
 CSS is used for the 'style' of the webpage(s). It removes what used to be tags added to every page, and centralizes
