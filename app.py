@@ -1,10 +1,9 @@
 from flask import Flask
 from flask import render_template
-import os
 
-app = Flask(__name__)
+# Static is where all of our static files are stored
+app = Flask(__name__, static_url_path='/static')
 
-@app.route("/")
-def hello():
-    print(os.getcwd())
+@app.route("/", methods=['GET', 'POST'])
+def main():
     return render_template("index.htm")

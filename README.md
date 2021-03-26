@@ -61,6 +61,8 @@ doxygen can be used to connect this tutorials to others in a web format in combi
 When deploying a web app to Azure, Azure creates a `gunicorn` web server to serve your app. This looks for a file called
 `app.py` in your directory.
 
+Good reference page is: [Configure a Linux Python app for Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python)
+
 ### Tools Involved in this Project
 1. Hosting/Cloud: [Microsoft Azure/Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
 2. Language: [Python 3.6+](https://www.python.org/download/releases/3.0/)
