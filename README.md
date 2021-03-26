@@ -9,7 +9,7 @@
 * [Checking Versions and Signing into Azure CLI](#checking-versions-and-signing-into-azure-cli)
 * [Getting a Sample from Azure Github](#getting-a-sample-from-azure-github)
 * [Run the Sample](#run-the-sample)
-* [Deploy the Sample/The App](#deploy-the-sample-the-app)
+* [Deploy the App](#deploy-the-app)
   * [Things to Note](#things-to-note)
 * [Browse to the App](#browse-to-the-app)
 * [Redeploy Updates](#redeploy-updates)
