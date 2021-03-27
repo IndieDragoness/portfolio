@@ -34,6 +34,14 @@
   * [Main Tag](#main-tag)
 * [HTML Example Elements](#html-example-elements)
   * [Navbar on Small Screens](#navbar-on-small-screens)
+  * [Navbar on Bigger Screens](#navbar-on-bigger-screens)
+  * [Page Content and Header](#page-content-and-header)
+  * [About Section](#about-section)
+  * [Grid for Pricing Tables](#grid-for-pricing-tables)
+  * [Testimonials](#testimonials)
+  * [Portfolio Section](#portfolio-section)
+  * [Footer](#footer)
+
 * [HTML Global Event Attributes and JavaScript](#html-global-event-attributes-and-javaScript)
   * [Window Events](#window-events)
   * [Form Events](#form-events)
@@ -44,6 +52,10 @@
   * [Media Events](#media-events)
   * [Misc Events](#misc-events)
 * [HTML Sources](#html-sources)
+
+## VENV
+* [venv Lightweight Python Virtual Environment](#venv-lightweight-python-virtual-environment)
+  * [Creating Virtual Environments](#creating-virtual-environments)
 
 ## Quick Reference
 Workflow goes like this:
@@ -296,6 +308,134 @@ Note: There must not be more than one `<main>` element in a document.
 The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<footer>`, `<header>`, or `<nav>` element.
 
 ## HTML Example Elements
+Some general procedures.
+
+Step 1: Specify Doctype
+```
+Add this to the top of the page: `<!DOCTYPE html>`
+```
+
+Step 2: HTML Tag
+```
+Open the html code with this: <html>
+Put code here.
+Close the html code with this: </html>
+```
+
+Step 3: Title
+```
+Add a title: <title>Sage Portfolio</title>
+```
+
+Step 4: Character Set
+```
+Add a character set: <meta charset="UTF-8">
+```
+
+Step 5: Viewport
+```
+Specify the viewport: <meta name="viewport" content="width=device-width, initial-scale=1">
+
+The viewport is the user's visible area of a web page. Varies by device. Useful for interacting with both phones and computers.
+```
+
+Step 6: HTML Link Tag
+```
+To specify an external stylesheet: <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+The <link> tag defines the relationship between the current document and an external resource.
+The <link> tag is most often used to link to external style sheets.
+The <link> element is an empty element, it contains attributes only.
+```
+
+Step 7: Specify [Style](#style-tag)
+```
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens. 'Raw' escapes special characters for Python Flask */
+{% raw %}
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+{% endraw %}
+</style>
+```
+
+Step 8: Specify Body of Document
+```
+<body class="w3-black">
+HTML Code here
+</body>
+
+The <body> tag defines the document's body.
+The <body> element contains all the contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
+```
+
+Step 9: Use Div Tag to Separate Sections inside the Body:
+```
+   <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">11+</span><br>
+        Partners
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">55+</span><br>
+        Projects Done
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">89+</span><br>
+        Happy Clients
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">150+</span><br>
+        Meetings
+      </div>
+    </div>
+
+A <span> element which is used to color a part of a text:
+The <span> tag is an inline container used to mark up a part of a text, or a part of a document.
+The <span> tag is easily styled by CSS or manipulated with JavaScript using the class or id attribute.
+The <span> tag is much like the <div> element, but <div> is a block-level element and <span> is an inline element.
+
+A <div> element which is used as a container:
+The <div> tag defines a division or a section in an HTML document.
+The <div> tag is used as a container for HTML elements - which is then styled with CSS or manipulated with JavaScript.
+The <div> tag is easily styled by using the class or id attribute.
+
+Any sort of content can be put inside the <div> tag! 
+
+Note: By default, browsers always place a line break before and after the <div> element.
+```
+
+Step 10: Use the Class Attribute to point to a Class Name in a Style Sheet.
+```
+<div class="w3-padding-64 w3-content" id="projects">
+
+It can also be used by a JavaScript to access and manipulate elements with the specific class name.
+```
+
+Example:
+```
+Style sheet specifies the class:
+<style>
+.city {
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+</style>
+
+Div uses the class:
+<div class="city">
+  <h2>London</h2>
+  <p>London is the capital of England.</p>
+</div>
+```
 
 ### Navbar on Small Screens
 
@@ -312,6 +452,14 @@ The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<fo
 ```
 
 ### Navbar on Bigger Screens
+The `<nav>` tag defines a set of navigation links.
+
+Notice that NOT all links of a document should be inside a `<nav>` element.
+The `<nav>` element is intended only for major block of navigation links.
+
+Browsers, such as screen readers for disabled users, can use this element to determine whether to omit the initial rendering of this content.
+
+Use `href="#"` to setup in-document navigation. For example, `href="#contact"` will take the user to the `contact` section.
 
 ```
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -336,9 +484,109 @@ The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<fo
   </a>
 </nav>
 ```
+### Page Content and Header
+Specifies the main class and the header. This is where the `Home` button sends the viewer when clicked.
+The string `I'm` is not shown in mobile view. `Sage` is.
+```
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Sage.</h1>
+    <p>Senior Software Engineer.</p>
+    <img src="static/images/laptop_rainbow.jpg" alt="laptop_rainbow" class="w3-image" width="992" height="1108">
+  </header>
+```
+
+### About Section
+```
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">My Name</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+    <p class="w3-wide">Photography</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:95%"></div>
+    </div>
+    <p class="w3-wide">Web Design</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:85%"></div>
+    </div>
+    <p class="w3-wide">Photoshop</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+    </div><br>
+    
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">11+</span><br>
+        Partners
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">55+</span><br>
+        Projects Done
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">89+</span><br>
+        Happy Clients
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">150+</span><br>
+        Meetings
+      </div>
+    </div>
+
+    <button class="w3-button w3-light-grey w3-padding-large w3-section">
+      <i class="fa fa-download"></i> Download Resume
+    </button>
+```
+### Grid for Pricing Tables
+```
+      <!-- Grid for pricing tables -->
+      <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
+      <div class="w3-row-padding" style="margin:0 -16px">
+          <div class="w3-half w3-margin-bottom">
+              <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                  <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+                  <li class="w3-padding-16">Web Design</li>
+                  <li class="w3-padding-16">Photography</li>
+                  <li class="w3-padding-16">5GB Storage</li>
+                  <li class="w3-padding-16">Mail Support</li>
+                  <li class="w3-padding-16">
+                      <h2>$ 10</h2>
+                      <span class="w3-opacity">per month</span>
+                  </li>
+                  <li class="w3-light-grey w3-padding-24">
+                      <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                  </li>
+              </ul>
+          </div>
+
+          <div class="w3-half">
+              <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                  <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
+                  <li class="w3-padding-16">Web Design</li>
+                  <li class="w3-padding-16">Photography</li>
+                  <li class="w3-padding-16">50GB Storage</li>
+                  <li class="w3-padding-16">Endless Support</li>
+                  <li class="w3-padding-16">
+                      <h2>$ 25</h2>
+                      <span class="w3-opacity">per month</span>
+                  </li>
+                  <li class="w3-light-grey w3-padding-24">
+                      <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+                  </li>
+              </ul>
+          </div>
+          <!-- End Grid/Pricing tables -->
+```
 
 ### Testimonials
-![]()
 
 ```
 <!-- Testimonials -->
@@ -350,6 +598,47 @@ The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<fo
 <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
 <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
 <p>No one is better than John Doe.</p>
+```
+### Portfolio Section
+```
+  <!-- Portfolio Section -->
+  <div class="w3-padding-64 w3-content" id="projects">
+    <h2 class="w3-text-light-grey">My Projects</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <!-- Grid for photos -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <img src="/w3images/wedding.jpg" style="width:100%">
+        <img src="/w3images/rocks.jpg" style="width:100%">
+        <img src="/w3images/sailboat.jpg" style="width:100%">
+      </div>
+
+      <div class="w3-half">
+        <img src="/w3images/underwater.jpg" style="width:100%">
+        <img src="/w3images/chef.jpg" style="width:100%">
+        <img src="/w3images/wedding.jpg" style="width:100%">
+        <img src="/w3images/p6.jpg" style="width:100%">
+      </div>
+    <!-- End photo grid -->
+    </div>
+  <!-- End Portfolio Section -->
+  </div>
+```
+
+### Footer
+```
+<!-- Footer with Social Media Icons -->
+<footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    <!-- End footer -->
+</footer>
 ```
 
 ## HTML Global Event Attributes and JavaScript
@@ -482,7 +771,9 @@ The [venv](https://docs.python.org/3/library/venv.html#module-venv) module provi
 Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.
 
 ### Creating Virtual Environments
-Creation of [virtual environments]() is done by executing the command `venv`:
+Useful for running local servers to test web pages!
+
+Creation of virtual environments is done by executing the command `venv`:
 
 ```
 # Linux Version
