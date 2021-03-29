@@ -19,11 +19,15 @@
 * [Clean up Resources](#clean-up-resources)
 * [Troubleshooting Guide](#troubleshooting-guide)
 
+## Microsoft Azure Cosmos DB
+* [Cosmos DB](#cosmos-db)
+
 ## Python Flask Specific Sections
 * [Python Flask](#python-flask)
   * [Error: Template Not Found](#template-not-found)
   * [Error: Missing End of Comment Tag](#missing-end-of-comment-tag)
   * [Interfacing with HTML Contact Form](#interfacing-with-html-contact-form)
+
 ## CSS Specific Sections
 * [CSS Structures](#css-structures)
   * [Tailoring to Mobile vs Desktop using Media Queries](#tailoring-to-mobile-vs-desktop-using-media-queries)
@@ -216,6 +220,9 @@ The `--no-wait` argument allows the command to return before the operation is co
 
 ## Troubleshooting Guide
 The guide is [located here](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#troubleshooting).
+
+## Cosmos DB
+The URI for the Portfolio app Cosmos DB is: [https://sage-portfolio-app-cosmos-db.documents.azure.com:443/](https://sage-portfolio-app-cosmos-db.documents.azure.com:443/)
 
 ## Python Flask
 This portion of the `README` covers Python `Flask` steps. Python `Flask` is used by `Gunicorn` on Microsoft Azure to serve up the app.
