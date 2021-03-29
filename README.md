@@ -23,7 +23,7 @@
 * [Python Flask](#python-flask)
   * [Error: Template Not Found](#template-not-found)
   * [Error: Missing End of Comment Tag](#missing-end-of-comment-tag)
-
+  * [Interfacing with HTML Contact Form](#interfacing-with-html-contact-form)
 ## CSS Specific Sections
 * [CSS Structures](#css-structures)
   * [Tailoring to Mobile vs Desktop using Media Queries](#tailoring-to-mobile-vs-desktop-using-media-queries)
@@ -43,14 +43,9 @@
   * [Footer](#footer)
 
 * [HTML Global Event Attributes and JavaScript](#html-global-event-attributes-and-javaScript)
-  * [Window Events](#window-events)
-  * [Form Events](#form-events)
-  * [Keyboard Events](#keyboard-events)
-  * [Mouse Events](#mouse-events)
-  * [Drag Events](#drag-events)
-  * [Clipboard Events](#clipboard-events)
-  * [Media Events](#media-events)
-  * [Misc Events](#misc-events)
+  * [Javascript](#javascript)
+  * [Events](#events)
+
 * [HTML Sources](#html-sources)
 
 ## VENV
@@ -225,6 +220,8 @@ The guide is [located here](https://docs.microsoft.com/en-us/azure/app-service/c
 ## Python Flask
 This portion of the `README` covers Python `Flask` steps. Python `Flask` is used by `Gunicorn` on Microsoft Azure to serve up the app.
 
+[Full Flask Tutorial Series](https://www.tutorialspoint.com/flask/index.htm)
+
 **Tips**
 * Store `.html` files in the `templates` folder.
 * Use `render_template` to render an entire `.html` page.
@@ -243,6 +240,9 @@ to surround the special characters in the affect `.html` file:
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 {% endraw %}
 ```
+
+### Interfacing with HTML Contact Form
+Use [this tutorial](https://stackoverflow.com/questions/19213226/how-to-html-input-to-flask) to setup a contact form with Flask and HTML.
 
 ## CSS Structures
 CSS is used for the 'style' of the webpage(s). It removes what used to be tags added to every page, and centralizes
@@ -644,121 +644,12 @@ The string `I'm` is not shown in mobile view. `Sage` is.
 ## HTML Global Event Attributes and JavaScript
 HTML has the ability to let events trigger actions in a browser, like starting a JavaScript when a user clicks on an element.
 
+### Javascript
 [JavaScript tutorial](https://www.w3schools.com/js/default.asp).
 
+### Events
 Below are the global event attributes that can be added to HTML elements to define event actions.
-
-### Window Events
-Events triggered for the window object (applies to the <body> tag):
-
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [onafterprint](https://www.w3schools.com/tags/ev_onafterprint.asp) | Script to be run after the document is printed |
-| [onbeforeprint](https://www.w3schools.com/tags/ev_onbeforeprint.asp) | Script to be run before the document is printed |
-| [onbeforeunload](https://www.w3schools.com/tags/ev_onbeforeunload.asp) | Script to be run when the document is about to be unloaded |
-| [onerror](https://www.w3schools.com/tags/ev_onerror.asp) | Script to be run when an error occurs |
-| [onhashchange](https://www.w3schools.com/tags/ev_onhashchange.asp) | Script to be run when there has been changes to the anchor part of the a URL |
-| [onload](https://www.w3schools.com/tags/ev_onload.asp) | Fires after the page is finished loading |
-| `onmessage` | Script to be run when the message is triggered |
-| [onoffline](https://www.w3schools.com/tags/ev_onoffline.asp) | Script to be run when the browser starts to work offline |
-| [ononline](https://www.w3schools.com/tags/ev_ononline.asp) | 	Script to be run when the browser starts to work online |
-| `onpagehide` | Script to be run when a user navigates away from a page |
-| [onpageshow](https://www.w3schools.com/tags/ev_onpageshow.asp) | 	Script to be run when a user navigates to a page |
-| `onpopstate` | Script to be run when the window's history changes |
-| [onresize](https://www.w3schools.com/tags/ev_onresize.asp) | Fires when the browser window is resized |
-| `onstorage` | Script to be run when a Web Storage area is updated |
-| [onunload](https://www.w3schools.com/tags/ev_onunload.asp) | Fires once a page has unloaded (or the browser window has been closed) |
-
-### Form Events
-Events triggered by actions inside a HTML form (applies to almost all HTML elements, but is most used in form elements):
-
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [onblur](https://www.w3schools.com/tags/ev_onblur.asp) | Fires the moment that the element loses focus |
-| [onchange](https://www.w3schools.com/tags/ev_onchange.asp) | Fires the moment when the value of the element is changed |
-| [oncontextmenu](https://www.w3schools.com/tags/ev_oncontextmenu.asp) | Script to be run when a context menu is triggered |
-| [onfocus](https://www.w3schools.com/tags/ev_onfocus.asp) | Fires the moment when the element gets focus |
-| [oninput](https://www.w3schools.com/tags/ev_oninput.asp) | Script to be run when an element gets user input |
-| [oninvalid](https://www.w3schools.com/tags/ev_oninvalid.asp) | Script to be run when an element is invalid |
-| [onreset](https://www.w3schools.com/tags/ev_onreset.asp) | Fires when the Reset button in a form is clicked |
-| [onsearch](https://www.w3schools.com/tags/ev_onsearch.asp) | Fires when the user writes something in a search field (for `<input="search">`) |
-| [onselect](https://www.w3schools.com/tags/ev_onselect.asp) | Fires after some text has been selected in an element |
-| [onsubmit](https://www.w3schools.com/tags/ev_onsubmit.asp) | Fires when a form is submitted |
-
-### Keyboard Events
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [onkeydown](https://www.w3schools.com/tags/ev_onkeydown.asp) | Fires when a user is pressing a key |
-| [onkeypress](https://www.w3schools.com/tags/ev_onkeypress.asp) | Fires when a user presses a key |
-| [onkeyup](https://www.w3schools.com/tags/ev_onkeyup.asp) | Fires when a user releases a key |
-
-### Mouse Events
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [onclick](https://www.w3schools.com/tags/ev_onclick.asp) | Fires on a mouse click on the element |
-| [ondblclick](https://www.w3schools.com/tags/ev_ondblclick.asp) | Fires on a mouse double-click on the element |
-| [onmousedown](https://www.w3schools.com/tags/ev_onmousedown.asp) | Fires when a mouse button is pressed down on an element |
-| [onmousemove](https://www.w3schools.com/tags/ev_onmousemove.asp) | Fires when the mouse pointer is moving while it is over an element |
-| [onmouseout](https://www.w3schools.com/tags/ev_onmouseout.asp) | Fires when the mouse pointer moves out of an element |
-| [onmouseover](https://www.w3schools.com/tags/ev_onmouseover.asp) | Fires when the mouse pointer moves over an element |
-| [onmouseup](https://www.w3schools.com/tags/ev_onmouseup.asp) | Fires when a mouse button is released over an element |
-| `onmousewheel` | Deprecated. Use the `onwheel` attribute instead |
-| [onwheel](https://www.w3schools.com/tags/ev_onwheel.asp) | Fires when the mouse wheel rolls up or down over an element |
-
-### Drag Events
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [ondrag](https://www.w3schools.com/tags/ev_ondrag.asp) | Script to be run when an element is dragged |
-| [ondragend](https://www.w3schools.com/tags/ev_ondragend.asp | Script to be run at the end of a drag operation |
-| [ondragenter](https://www.w3schools.com/tags/ev_ondragenter.asp) | Script to be run when an element has been dragged to a valid drop target |
-| [ondragleave](https://www.w3schools.com/tags/ev_ondragleave.asp) | Script to be run when an element leaves a valid drop target |
-| [ondragover](https://www.w3schools.com/tags/ev_ondragover.asp) | Script to be run when an element is being dragged over a valid drop target |
-| [ondragstart](https://www.w3schools.com/tags/ev_ondragstart.asp) | Script to be run at the start of a drag operation |
-| [ondrop](https://www.w3schools.com/tags/ev_ondrop.asp) | Script to be run when dragged element is being dropped |
-| [onscroll](https://www.w3schools.com/tags/ev_onscroll.asp) | Script to be run when an element's scrollbar is being scrolled |
-
-### Clipboard Events
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [oncopy](https://www.w3schools.com/tags/ev_oncopy.asp) | Fires when the user copies the content of an element |
-| [oncut](https://www.w3schools.com/tags/ev_oncut.asp) | Fires when the user cuts the content of an element |
-| [onpaste](https://www.w3schools.com/tags/ev_onpaste.asp) | Fires when the user pastes some content in an element |
-
-### Media Events
-Events triggered by medias like videos, images and audio (applies to all HTML elements, but is most common in media elements, like `<audio>`, `<embed>`, `<img>`, `<object>`, and `<video>`).
-
-[HTML Audio and Video DOM Reference](https://www.w3schools.com/tags/ref_av_dom.asp)
-
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| `onabort` | Script to be run on abort |
-| `oncanplay` | Script to be run when a file is ready to start playing (when it has buffered enough to begin) |
-| `oncanplaythrough` | 	Script to be run when a file can be played all the way to the end without pausing for buffering |
-| `oncuechange` | Script to be run when the cue changes in a `<track>` element |
-| `ondurationchange` | Script to be run when the length of the media changes |
-| `onemptied` | Script to be run when something bad happens and the file is suddenly unavailable (like unexpectedly disconnects) |
-| `onended` | Script to be run when the media has reach the end (a useful event for messages like "thanks for listening") |
-| `onerror` | Script to be run when an error occurs when the file is being loaded |
-| `onloadeddata` | Script to be run when media data is loaded |
-| `onloadedmetadata` | Script to be run when meta data (like dimensions and duration) are loaded |
-| `onloadstart` | Script to be run just as the file begins to load before anything is actually loaded |
-| `onpause` | Script to be run when the media is paused either by the user or programmatically |
-| `onplay` | Script to be run when the media is ready to start playing |
-| `onplaying` | Script to be run when the media actually has started playing |
-| `onprogress` | Script to be run when the browser is in the process of getting the media data |
-| `onratechange` | Script to be run each time the playback rate changes (like when a user switches to a slow motion or fast forward mode) |
-| `onseeked` | Script to be run when the seeking attribute is set to false indicating that seeking has ended |
-| `onseeking` | Script to be run when the seeking attribute is set to true indicating that seeking is active |
-| `onstalled` | Script to be run when the browser is unable to fetch the media data for whatever reason |
-| `onsuspend` | Script to be run when fetching the media data is stopped before it is completely loaded for whatever reason |
-| `ontimeupdate` | Script to be run when the playing position has changed (like when the user fast forwards to a different point in the media) |
-| `onvolumechange` | Script to be run each time the volume is changed which (includes setting the volume to "mute") |
-| `onwaiting` | 	Script to be run when the media has paused but is expected to resume (like when the media pauses to buffer more data) |
-
-### Misc Events
-| Attribute        | Description      |
-| ---------------- | ---------------- |
-| [ontoggle](https://www.w3schools.com/tags/ev_ontoggle.asp) | Fires when the user opens or closes the `<details>` element |
+[Table of Events](https://www.w3schools.com/tags/ref_eventattributes.asp)
 
 ## HTML Sources
 * [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
