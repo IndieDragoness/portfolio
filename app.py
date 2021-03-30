@@ -48,7 +48,7 @@ def contact_form_action():
     try:
         app.logger.info('Checking if email is already present in database...')
         # Portfolio Section is the Partition Key for the Portfolio Container (used for point reads and writes)
-        new_entry = {'id': email, 'name': name, 'subject': subject, 'message': message, 'portfolio_section': "contact_form"}
+        new_entry = {'id': email, 'name': name, 'message': subject + ": " + message, 'portfolio_section': "contact_form"}
         container.create_item(new_entry)
         app.logger.info('Email not present! Created new database entry successfully: ' + email)
     except ResourceExistsError:
@@ -68,7 +68,7 @@ def contact_form_action():
             if 'message' in entry:
                 message_count += 1
         app.logger.info('This is the {} message for this id.'.format(message_count))
-        item["message{}".format(message_count)] = message
+        item["message{}".format(message_count)] = subject + ": " + message
         updated_item = container.upsert_item(item)
 
     # Scroll the page down to the Contact Form, after Submit is pressed, and say 'Thank you!'
