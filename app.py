@@ -1,8 +1,19 @@
 from flask import Flask, render_template, request
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 from azure.core.exceptions import ResourceExistsError
+from .scripts.utilities import count_string_in_dictionary_keys
 import logging
 import json
+
+# ================================== #
+#    _____                                  
+#   /  _  \  ________ __ __ _______   ____  
+#  /  /_\  \ \___   /|  |  \\_  __ \_/ __ \ 
+# /    |    \ /    / |  |  / |  | \/\  ___/ 
+# \____|__  //_____ \|____/  |__|    \___  >
+#         \/       \/                    \/ 
+#                                           
+# ================================== #
 
 # Microsoft Azure Cosmos DB Initialization
 # Create Cosmos Client
@@ -16,7 +27,15 @@ database = client.get_database_client(database_name)
 container_name = 'Portfolio_Container'
 container = database.get_container_client(container_name)
 
-# Flask
+# ================================== #
+# ___________.__                    __    
+# \_   _____/|  |  _____     ______|  | __
+#  |    __)  |  |  \__  \   /  ___/|  |/ /
+#  |     \   |  |__ / __ \_ \___ \ |    < 
+#  \___  /   |____/(____  //____  >|__|_ \
+#      \/               \/      \/      \/
+# ================================== #
+
 # Static is where all of our static files are stored
 app = Flask(__name__, static_url_path='/static')
 
@@ -26,6 +45,16 @@ logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(ascti
 @app.route("/", methods=['GET', 'POST'])
 def main():
     return render_template("index.htm")
+
+# Link to disc_drive_project.htm
+@app.route('/disc_drive_project', methods=['POST', 'GET'])
+def disc_drive_project():
+    return render_template("disc_drive_project.htm")
+
+# Link to particle_accelerator.htm
+@app.route('/particle_accelerator_project', methods=['POST', 'GET'])
+def particle_accelerator_project():
+    return render_template("particle_accelerator_project.htm")
 
 # Section correlates to the Contact Form in index.htm
 @app.route('/contact_form_action', methods=['POST'])
@@ -45,13 +74,13 @@ def contact_form_action():
     app.logger.info('Message: ' + message)
 
     # Post data to Contact_Form container in Microsoft Azure Cosmos DB
-    try:
+    try: # Try to create a new entry with given data
         app.logger.info('Checking if email is already present in database...')
         # Portfolio Section is the Partition Key for the Portfolio Container (used for point reads and writes)
         new_entry = {'id': email, 'name': name, 'message': subject + ": " + message, 'portfolio_section': "contact_form"}
         container.create_item(new_entry)
         app.logger.info('Email not present! Created new database entry successfully: ' + email)
-    except ResourceExistsError:
+    except ResourceExistsError: # Add to existing entry if unable to create a new one
         app.logger.info('Email already present in database. Adding new message to existing entry: ' + email)
 
         # Get the current entry in the database for this email and add this new message
@@ -63,10 +92,9 @@ def contact_form_action():
         item = container.read_item(email, partition_key="contact_form")
         app.logger.info('Acquired item.\n{}'.format(item))
 
-        message_count = 0
-        for entry in item.keys():
-            if 'message' in entry:
-                message_count += 1
+        # Get the number of keys containing "message" substring
+        message_count = count_string_in_dictionary_keys(str_value="message", dict_value=item)
+
         app.logger.info('This is the {} message for this id.'.format(message_count))
         item["message{}".format(message_count)] = subject + ": " + message
         updated_item = container.upsert_item(item)
