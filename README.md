@@ -21,7 +21,6 @@
 
 ## Microsoft Azure Cosmos DB
 * [Cosmos DB](#cosmos-db)
-  * [Partition Key](#partition-key)
 
 ## Python Flask Specific Sections
 * [Python Flask](#python-flask)
@@ -224,11 +223,6 @@ The guide is [located here](https://docs.microsoft.com/en-us/azure/app-service/c
 
 ## Cosmos DB
 The URI for the Portfolio app Cosmos DB is: [https://sage-portfolio-app-cosmos-db.documents.azure.com:443/](https://sage-portfolio-app-cosmos-db.documents.azure.com:443/)
-
-### Partition Key
-Cosmos DB uses a Partition Key that you must manually specify in the Container and then implement as a `PartitionKey:Value` pair in your data.
-
-More information [found here](https://azure.microsoft.com/en-us/resources/videos/azure-documentdb-elastic-scale-partitioning/).
 
 ## Python Flask
 This portion of the `README` covers Python `Flask` steps. Python `Flask` is used by `Gunicorn` on Microsoft Azure to serve up the app.
