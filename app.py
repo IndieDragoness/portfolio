@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 from azure.core.exceptions import ResourceExistsError
-from scripts import utilities
 import logging
 import json
 
@@ -101,3 +100,11 @@ def contact_form_action():
 
     # Scroll the page down to the Contact Form, after Submit is pressed, and say 'Thank you!'
     return render_template("/index.htm", submit_button_pressed="contact")
+
+def count_string_in_dictionary_keys(str_value, dict_value):
+    "Iterates through the keys of dict_value, counts the number of keys containing str_value."
+    string_count = 0
+    for s in dict_value.keys():
+        if str_value in s:
+            string_count += 1
+    return string_count
