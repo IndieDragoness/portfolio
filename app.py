@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 from azure.core.exceptions import ResourceExistsError
-from .scripts.utilities import count_string_in_dictionary_keys
+from scripts import utilities
 import logging
 import json
 
