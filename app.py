@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 from azure.core.exceptions import ResourceExistsError
-from .scripts.utilities import *
+from scripts import utilities
 import logging
 import json
 
@@ -93,7 +93,7 @@ def contact_form_action():
         app.logger.info('Acquired item.\n{}'.format(item))
 
         # Get the number of keys containing "message" substring
-        message_count = count_string_in_dictionary_keys(str_value="message", dict_value=item)
+        message_count = utilities.count_string_in_dictionary_keys(str_value="message", dict_value=item)
 
         app.logger.info('This is the {} message for this id.'.format(message_count))
         item["message{}".format(message_count)] = subject + ": " + message
