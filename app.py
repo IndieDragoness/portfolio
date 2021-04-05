@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from azure.cosmos import exceptions, CosmosClient, PartitionKey
 from azure.core.exceptions import ResourceExistsError
 from scripts import utilities
@@ -42,19 +42,35 @@ app = Flask(__name__, static_url_path='/static')
 # Setup Flask Logging to record events at Runtime
 logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def main():
     return render_template("index.htm")
 
 # Link to disc_drive_project.htm
-@app.route('/disc_drive_project', methods=['POST', 'GET'])
+@app.route('/disc_drive_project')
 def disc_drive_project():
     return render_template("disc_drive_project.htm")
 
-# Link to particle_accelerator.htm
-@app.route('/particle_accelerator_project', methods=['POST', 'GET'])
+# Link to particle_accelerator_project.htm
+@app.route('/particle_accelerator_project')
 def particle_accelerator_project():
     return render_template("particle_accelerator_project.htm")
+
+# Link to tensorflow_project.htm
+@app.route('/tensorflow_project')
+def tensorflow_project():
+    return render_template("tensorflow_project.htm")
+
+# Link to unity_project.htm
+@app.route('/unity_project')
+def unity_project():
+    return render_template("unity_project.htm")
+
+# Download my RL-PCG Paper
+@app.route('/unity_project/download_rlpcg_paper', methods=['POST'])
+def download_rlpcg_paper():
+    app.logger.info('Paper Download Detected!')
+    return send_file('static/documents/Teaching_RL_PCG_via_Educational_Game.pdf', as_attachment=True)
 
 # Section correlates to the Contact Form in index.htm
 @app.route('/contact_form_action', methods=['POST'])
