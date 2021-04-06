@@ -56,6 +56,14 @@
             <i class="fa fa-eye w3-xxlarge"></i>
             <p>MLAGENTS</p>
         </a>
+        <a href="#bolt" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-eye w3-xxlarge"></i>
+            <p>BOLT</p>
+        </a>
+        <a href="#games" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-eye w3-xxlarge"></i>
+            <p>PROTOTYPES</p>
+        </a>
     </nav>
 
     <!-- Navbar on small screens (Hidden on medium and large screens) -->
@@ -72,7 +80,7 @@
         <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
             <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Unity Projects.</h1>
             <p>Senior Software Engineer.</p>
-            <img src="static/images/made_with_unity.png" alt="disc_drive" class="w3-image" width="992" height="1108">
+            <img src="static/images/made_with_unity.png" alt="disc_drive" class="w3-image" width="400" height="600">
         </header>
 
         <!-- Summary Section -->
@@ -80,9 +88,11 @@
             <h2 class="w3-text-light-grey">Hobby Game Developer</h2>
             <hr style="width:200px" class="w3-opacity">
             <p>
-                Over the course of six years I've developed various scripts, assets, and art for the Unity Game Engine. Some of these
-                works I've sold on the Unity Asset Store. Others are longer term hobby projects. This page covers some of the various
-                projects I've worked on in my spare time, to include my efforts with the Machine Learning Agents Unity framework.
+                <b>
+                    Over the course of six years I've developed various scripts, assets, and art for the Unity Game Engine. Some of these
+                    works I've sold on the Unity Asset Store. Others are longer term hobby projects. This page covers some of the various
+                    projects I've worked on in my spare time, to include my efforts with the Machine Learning Agents Unity framework.
+                </b>
             </p>
             <p>
                 Unity, the Unity logo and any related
@@ -91,31 +101,83 @@
             <!-- End Summary Section -->
         </div>
 
-        <!-- MLAgents Section -->
+        <!-- Subprojects Section -->
+        <!-- Begin MLAgents Section -->
         <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="mlagents">
+
             <h2 class="w3-text-light-grey">Machine Learning Agents in Unity Game Engine</h2>
+
+            <div>
+                <!-- Gifs -->
+                <img src="static/images/mlagents_navigation.gif" alt="mlagents_navigation" class="w3-image" width="450" height="600">
+                <img src="static/images/mlagents_RL_PCG.gif" alt="mlagents_RL_PCG" class="w3-image" width="450" height="600">
+            </div>
+
             <hr style="width:200px" class="w3-opacity">
             <p>
-                As part of my coursework for my masters degree program I wrote a paper and developed a demonstration game
-                that attempts to teach Reinforcement Learning Procedural Content Generation (RL-PCG). In the demonstration game,
-                I utilized <a href="https://unity.com/products/machine-learning-agents">Unity's Machine Learning Agents</a> framework
-                to bring <a href="https://www.tensorflow.org/">Tensorflow</a> capabilities into the game engine. 
+                <b>
+                    As part of my coursework for my masters degree program I wrote a paper and developed a demonstration game
+                    that attempts to teach Reinforcement Learning Procedural Content Generation (RL-PCG). In the demonstration game,
+                    I utilized <a href="https://unity.com/products/machine-learning-agents">Unity's Machine Learning Agents</a> framework
+                    to bring <a href="https://www.tensorflow.org/">Tensorflow</a> capabilities into the game engine.
+                </b>
             </p>
             <p>
-                <ul>
-                    <li><a href="https://unity.com/products/machine-learning-agents">Unity ML Agents</a></li>
-                    <li><a href="https://github.com/Unity-Technologies/ml-agents">Unity ML Agents Github</a></li>
-                    <li><a href="https://www.tensorflow.org/">Tensorflow</a></li>
-                </ul>
+                <b>
+                    <ul>
+                        <li><a href="https://unity.com/products/machine-learning-agents">Unity ML Agents</a></li>
+                        <li><a href="https://github.com/Unity-Technologies/ml-agents">Unity ML Agents Github</a></li>
+                        <li><a href="https://www.tensorflow.org/">Tensorflow</a></li>
+                    </ul>
+                </b>
             </p>
             <form action="/unity_project/download_rlpcg_paper" method="POST">
                 <button class="w3-button w3-light-grey w3-padding-large w3-section">
                     <i class="fa fa-download"></i> Download My RLPCG Paper
                 </button>
             </form>
-            <!-- End MLAgents Section -->
         </div>
+        <!-- End MLAgents Section -->
+        <!-- Begin Bolt Section -->
+        <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="bolt">
+            <h2 class="w3-text-light-grey">Bolt Visual Scripting</h2>
+            <div>
+                <!-- Gifs -->
+                <img src="static/images/bolt_visual_1.gif" alt="bolt_visual_1" class="w3-image" width="1200" height="1000">
+            </div>
 
+            <hr style="width:200px" class="w3-opacity">
+            <p>
+                <b>
+                    While learning Unity, I created a series of tutorials for Hobby Game developers on the
+                    <a href="https://unity.com/products/unity-visual-scripting">Bolt Visual Scripting</a> language. In addition,
+                    I created and submitted a public C# module that let users bridge data between Bolt and
+                    <a href="https://opsive.com/assets/behavior-designer/">Behavior Designer</a>.
+                </b>
+            </p>
+        </div>
+        <!-- End Bolt Section -->
+        <!-- Begin Bolt Section -->
+        <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="games">
+            <h2 class="w3-text-light-grey">Hobby Games</h2>
+            <div>
+                <!-- Gifs -->
+                <img src="static/images/hobby_game_visual_1.gif" alt="hobby_game_visual_1" class="w3-image" width="450" height="600">
+                <img src="static/images/hobby_game_visual_2.gif" alt="hobby_game_visual_2" class="w3-image" width="500" height="100">
+                <img src="static/images/hobby_game_visual_3.gif" alt="hobby_game_visual_3" class="w3-image" width="450" height="100">
+                <img src="static/images/hobby_game_visual_4.gif" alt="hobby_game_visual_4" class="w3-image" width="500" height="800">
+            </div>
+
+            <hr style="width:200px" class="w3-opacity">
+            <p>
+                <b>
+                    I've built numerous prototype games to learn the Unity game engine. While not deliverable, it's been a great way
+                    to learn C# and Unity.
+                </b>
+            </p>
+        </div>
+        <!-- End Bolt Section -->
+        <!-- End Subprojects Section -->
         <!-- Footer -->
         <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
             <!--<i class="fa fa-facebook-official w3-hover-opacity"></i>-->

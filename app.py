@@ -66,6 +66,26 @@ def tensorflow_project():
 def unity_project():
     return render_template("unity_project.htm")
 
+# Link to microsoft_azure_project.htm
+@app.route('/microsoft_azure_project')
+def microsoft_azure_project():
+    return render_template("microsoft_azure_project.htm")
+
+# Link to docker_project.htm
+@app.route('/docker_project')
+def docker_project():
+    return render_template("docker_project.htm")
+
+# Link to linux_project.htm
+@app.route('/linux_project')
+def linux_project():
+    return render_template("linux_project.htm")
+
+# Link to linux_project.htm
+@app.route('/awx_ansible_project')
+def awx_ansible_project():
+    return render_template("awx_ansible_project.htm")
+
 # Download my RL-PCG Paper
 @app.route('/unity_project/download_rlpcg_paper', methods=['POST'])
 def download_rlpcg_paper():
