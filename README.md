@@ -546,6 +546,50 @@ Below are the global event attributes that can be added to HTML elements to defi
 * [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
 * [JavaScript tutorial](https://www.w3schools.com/js/default.asp)
 
+# PRISM Code Highlighting
+The PRISM CSS and JavaScript files help label code in a beautiful way on the website.
+
+The `prism.js` file needs to be stored in `static/` and the `prism.css` file needs to be stored in `static/styles/`.
+
+To change plugins, re-download with the appropriate plugs checked/unchecked.
+
+First, add the CSS and JavaScript references to the HTML page.
+`prism.css`
+```
+<link rel="stylesheet" href="static/styles/prism.css">
+```
+`prism.js`
+```
+<script src="static/prism.js"></script>
+</body>
+```
+
+Second, highlight the code. You can do this by removing an `<p>` paragraph tags, as those are not necessary.
+Add the `<pre>` tag:
+```
+<pre>
+
+</pre>
+```
+
+Third, use the `<code>` tag:
+```
+<pre>
+    <code>
+
+    </code>
+</pre>
+```
+
+Fourth, add a class to code that calls out the specific language. Some possible ones are `language-javascript`, `language-python`, etc.
+```
+<pre>
+    <code class="language-<this_language>">
+
+    </code>
+</pre>
+```
+
 # venv Lightweight Python Virtual Environment
 Source (check for updates): [venv documentation](https://docs.python.org/3/library/venv.html)
 
