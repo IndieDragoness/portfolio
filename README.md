@@ -5,19 +5,9 @@
 * [Summary](#summary)
 
 ## Microsoft Azure Specific Sections
-* [Sources](#sources)
-* [Setting up Initial Environment](#setting-up-initial-environment)
-* [Checking Versions and Signing into Azure CLI](#checking-versions-and-signing-into-azure-cli)
-* [Getting a Sample from Azure Github](#getting-a-sample-from-azure-github)
-* [Run the Sample](#run-the-sample)
-* [Deploy the App](#deploy-the-app)
-  * [Things to Note](#things-to-note)
-* [Browse to the App](#browse-to-the-app)
-* [Redeploy Updates](#redeploy-updates)
-* [Stream Logs](#stream-logs)
-* [Manage the Azure App from the Azure Portal](#manage-the-azure-app-from-the-azure-portal)
-* [Clean up Resources](#clean-up-resources)
-* [Troubleshooting Guide](#troubleshooting-guide)
+* [Quickstart for Python Flask](#microsoft-azure-quickstart-for-python-flask)
+* [Environment Variables](#microsoft-azure-environment-variables)
+* [Flask Webapp Troubleshooting Guide](#microsoft-azure-flask-webapp-troubleshooting-guide)
 
 ## Microsoft Azure Cosmos DB
 * [Cosmos DB](#cosmos-db)
@@ -32,6 +22,7 @@
 ## CSS Specific Sections
 * [CSS Structures](#css-structures)
   * [Tailoring to Mobile vs Desktop using Media Queries](#tailoring-to-mobile-vs-desktop-using-media-queries)
+  * [Autoscaling Youtube Videos to Any Resolution](#autoscaling-youtube-videos)
 * [CSS Sources](#css-sources)
 
 ## HTML Specific Sections
@@ -57,13 +48,13 @@
 * [venv Lightweight Python Virtual Environment](#venv-lightweight-python-virtual-environment)
   * [Creating Virtual Environments](#creating-virtual-environments)
 
-## Quick Reference
+# Quick Reference
 Workflow goes like this:
 1. Dev in Visual Studio, from `C:\Users\R\Documents\GitHub\portfolio`.
 2. `Commit`, then `Push` to GitHub repo `https://github.com/IndieDragoness/portfolio`.
 3. Go to the [Microsoft Azure Portal, Deployment Center](https://portal.azure.com/#@gtvault.onmicrosoft.com/resource/subscriptions/e52de545-f8f0-424a-9954-5a4d4aa548d2/resourceGroups/portfolio-app/providers/Microsoft.Web/sites/sages-portfolio/vstscd) and make sure you have a GitHub actions setup to automatically deploy the GitHub repo Master to the app.
 
-## Summary
+# Summary
 The goal of this worksheet is to provide the steps to develop and maintain a Python Flask based portfolio
 website on Microsoft Azure's free cloud service/subdomain. The subdomain is `<app_name>.azurewebsites.net` and while
 normally having your own domain name would be preferable, this subdomain confirms to viewers that the Azure
@@ -75,7 +66,7 @@ When deploying a web app to Azure, Azure creates a `gunicorn` web server to serv
 
 Good reference page is: [Configure a Linux Python app for Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python)
 
-### Tools Involved in this Project
+## Tools Involved in this Project
 1. Hosting/Cloud: [Microsoft Azure/Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
 2. Language: [Python 3.6+](https://www.python.org/download/releases/3.0/)
 3. Backend: [Python Flask](https://flask.palletsprojects.com/en/1.1.x/)
@@ -86,151 +77,27 @@ Good reference page is: [Configure a Linux Python app for Azure App Service](htt
 6. CSS
 7. venv for virtual python environments (testing): [venv](https://docs.python.org/3/library/venv.html)
 
-## Sources
+# Microsoft Azure Quickstart for Python Flask
 * This page came from: [Microsoft Azure Quickstart for Python Flask](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask)
 * Deploying Flask: [Python Flask Deployment Options (including Azure)](https://flask.palletsprojects.com/en/master/deploying/)
 
-## Setting up Initial Environment
-* Have an Azure account with an active subscription. Create an account for free.
-* Install `Python 3.6` or higher.
-* Install the `Azure CLI 2.0.80` or higher, with which you run commands in any shell to provision and configure Azure resources.
-
-### Checking Versions and Signing into Azure CLI
-To check Python: `python3 --version`
-To check Azure CLI: `az --version`
-
-This command opens a browser to gather your credentials. When the command finishes, it shows JSON output containing information about your subscriptions.
-To sign in: `az login`
-
-### Getting a Sample from Azure Github
-You can also get a sample of Python Flask Azure deployment from their Github repo. This can be a great way to get
-started.
-
-Clone the sample repository using the following command and navigate into the sample folder.
-(Install [git](https://git-scm.com/downloads) if you don't have git already.)
-
-`git clone https://github.com/Azure-Samples/python-docs-hello-world`
-
-The sample contains framework-specific code that Azure App Service recognizes when starting the app.
-* [Container startup proces](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#container-startup-process)
-
-### Microsoft Azure Environment Variables
+# Microsoft Azure Environment Variables
 If your application requires any Environment Variables, create equivalent [App Service application settings](https://docs.microsoft.com/en-us/azure/app-service/configure-common#configure-app-settings).
 These App Service settings appear to your code as environment variables, as described on [Access environment variables](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#access-app-settings-as-environment-variables).
 
-
-## Run the Sample
-To run Azure's sample follow this procedure:
-1. Change directory:
-  * `cd python-docs-hello-world`
-2. Startup the virtual environment and install dependencies:
-  * `python3 -m venv .venv`
-  * `source .venv/bin/activate`
-  * `pip install -r requirements.txt`
-3. Run the development server:
-  * `flask run`
-
-By default, the server assumes that the app's entry module is in `app.py`, as used in the sample.
-If you use a different module name, set the `FLASK_APP` environment variable to that name.
-If you encounter the error, "Could not locate a Flask application. You did not provide the 'FLASK_APP' environment variable,
-and a 'wsgi.py' or 'app.py' module was not found in the current directory.", make sure you're in the python-docs-hello-world
-folder that contains the sample.
-
-Open a web browser and go to the sample app at: http://localhost:5000/
-The app displays the message Hello, World!.
-
-In your terminal window, press Ctrl+C to exit the development server.
-
-## Deploy the App
-Deploy the code in your local folder (python-docs-hello-world) using the az webapp up command:
-* `az webapp up --sku FREE --name <app-name>`
-
-### Things to Note
-* If the az command isn't recognized, be sure you have the Azure CLI installed as described in [Set up your initial environment](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask#set-up-your-initial-environment).
-* If the webapp command isn't recognized, it's because that your `Azure CLI` version isn't `2.0.80` or higher. [Install the latest version](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-* Replace `<app_name>` with a name that's unique across all of Azure (valid characters are a-z, 0-9, and -). A good pattern is to use a combination of your company name and an app identifier.
-* The `--sku B1` argument creates the web app on the Basic pricing tier, which incurs a small hourly cost. Omit this argument to use a faster premium tier.
-  * Example Tiers: `--sku {B1, B2, B3, D1, F1, FREE, I1, I1v2, I2, I2v2, I3, I3v2, P1V2, P1V3, P2V2, P2V3, P3V2, P3V3, PC2, PC3, PC4, S1, S2, S3, SHARED}`
-* You can optionally include the argument `--location <location-name>` where `<location_name>` is an available Azure region. You can retrieve a list of allowable regions for your Azure account by running the `az account list-locations` command.
-* If you see the error, "Could not auto-detect the runtime stack of your app," make sure you're running the command in the python-docs-hello-world folder (Flask) or the `python-docs-hello-django` folder (Django) that contains the requirements.txt file. (See [Troubleshooting auto-detect issues with az webapp up (GitHub)](https://github.com/Azure/app-service-linux-docs/blob/master/AzWebAppUP/runtime_detection.md).
-
-The command may take a few minutes to complete. While running, it provides messages about creating the resource group, the App Service plan and hosting app, configuring logging, then performing ZIP deployment. It then gives the message, "You can launch the app at `http://<app-name>.azurewebsites.net`", which is the app's URL on Azure.
-
-The `az webapp up` command does the following actions:
-* Create a default resource group.
-* Create a default app service plan.
-* Create an app with the specified name.
-* Zip deploy files from the current working directory to the app.
-
-Visual Studio Code provides powerful extensions for Python and Azure App Service, which simplify the process of deploying Python web apps to App Service.
-For more information, see [Deploy Python apps to App Service from Visual Studio Code](https://docs.microsoft.com/en-us/azure/python/tutorial-deploy-app-service-on-linux-01).
-
-## Browse to the App
-Browse to the deployed application in your web browser at the URL `http://<app-name>.azurewebsites.net`. It can take a minute or two for the the app to start, so if you see a default app page, wait a minute and refresh the browser.
-
-The Python sample code is running a Linux container in App Service using a built-in image.
-
-## Redeploy Updates
-In this section, you make a small code change and then redeploy the code to Azure. The code change includes a print statement to generate logging output that you work with in the next section.
-
-Open `app.py` in an editor and update the hello function to match the following code.
-
-```
-def hello():
-    print("Handling request to home page.")
-    return "Hello, Azure!"
-```
-
-Save your changes, then redeploy the app using the `az webapp up` command again:
-* `az webapp up`
-
-This command uses values that are cached locally in the `.azure/config` file, including the `app name`, `resource group`, and `App Service plan`.
-
-Once deployment is complete, switch back to the browser window open to `http://<app-name>.azurewebsites.net`. Refresh the page, which should display the modified message:
-* `Hello, Azure!`
-
-## Stream Logs
-You can access the console logs generated from inside the app and the container in which it runs. Logs include any output generated using `print` statements.
-
-To stream logs, run the [az webapp log tail](https://docs.microsoft.com/en-us/cli/azure/webapp/log#az_webapp_log_tail) command:
-* `az webapp log tail`
-
-You can also include the `--logs` parameter with then az webapp up command to automatically open the log stream on deployment.
-
-Refresh the app in the browser to generate console logs, which include messages describing HTTP requests to the app. If no output appears immediately, try again in 30 seconds.
-
-You can also inspect the log files from the browser at `https://<app-name>.scm.azurewebsites.net/api/logs/docker`.
-
-To stop log streaming at any time, press `Ctrl+C` in the terminal.
-
-## Manage the Azure App from the Azure Portal
-1. Go to the [Azure portal](https://portal.azure.com/) to manage the app you created. Search for and select `App Services`.
-2. Select the name of your Azure app.
-3. Selecting the app opens its Overview page, where you can perform basic management tasks like browse, stop, start, restart, and delete.
-4. The App Service menu provides different pages for configuring your app.
-
-## Clean up Resources
-In the preceding steps, you created Azure resources in a resource group. The resource group has a name like "appsvc_rg_Linux_CentralUS" depending on your location. If you keep the web app running, you will incur some ongoing costs (see App Service pricing).
-
-If you don't expect to need these resources in the future, delete the resource group by running the following command:
-* `az group delete --no-wait`
-
-The command uses the resource group name cached in the `.azure/config` file.
-
-The `--no-wait` argument allows the command to return before the operation is complete.
-
-## Troubleshooting Guide
+# Microsoft Azure Flask Webapp Troubleshooting Guide
 The guide is [located here](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python#troubleshooting).
 
-## Cosmos DB
+# Cosmos DB
 The URI for the Portfolio app Cosmos DB is: [https://sage-portfolio-app-cosmos-db.documents.azure.com:443/](https://sage-portfolio-app-cosmos-db.documents.azure.com:443/)
+You may also have to use the Database key.
 
-### Partition Key
+## Partition Key
 Cosmos DB uses a Partition Key that you must manually specify in the Container and then implement as a `PartitionKey:Value` pair in your data.
 
 More information [found here](https://azure.microsoft.com/en-us/resources/videos/azure-documentdb-elastic-scale-partitioning/).
 
-## Python Flask
+# Python Flask
 This portion of the `README` covers Python `Flask` steps. Python `Flask` is used by `Gunicorn` on Microsoft Azure to serve up the app.
 
 [Full Flask Tutorial Series](https://www.tutorialspoint.com/flask/index.htm)
@@ -240,10 +107,10 @@ This portion of the `README` covers Python `Flask` steps. Python `Flask` is used
 * Use `render_template` to render an entire `.html` page.
 * Use `{% raw %}` to escape any special characters that throw errors.
 
-### Template Not Found
+## Template Not Found
 This error frequently popped up due to `.html` files being in the wrong place. By default, `Flask` looks in the `/templates` folder.
 
-### Missing End of Comment Tag
+## Missing End of Comment Tag
 This error frequently popped up due to special characters in the `.html` files. The Flask Template system required me to use the following
 to surround the special characters in the affect `.html` file:
 ```
@@ -254,14 +121,14 @@ to surround the special characters in the affect `.html` file:
 {% endraw %}
 ```
 
-### Interfacing with HTML Contact Form
+## Interfacing with HTML Contact Form
 Use [this tutorial](https://stackoverflow.com/questions/19213226/how-to-html-input-to-flask) to setup a contact form with Flask and HTML.
 
-## CSS Structures
+# CSS Structures
 CSS is used for the 'style' of the webpage(s). It removes what used to be tags added to every page, and centralizes
 them under a single 'style' section. It can be used to define the mobile vs. desktop render.
 
-### Style Tag
+## Style Tag
 * [Style Tag Reference](https://www.w3schools.com/tags/tag_style.asp)
 
 Use of the <style> element to apply a simple style sheet to an HTML document:
@@ -286,7 +153,7 @@ Note: When a browser reads a style sheet, it will format the HTML document accor
 Tip: To link to an external style sheet, use the `<link>` tag.
 Tip: To learn more about style sheets, please read our [CSS Tutorial](https://www.w3schools.com/css/default.asp).
 
-### Tailoring to Mobile vs Desktop using Media Queries
+## Tailoring to Mobile vs Desktop using Media Queries
 The `@media` tag in the `<style>` section of the page can be used to tailor the webpage to different devices.
 
 Media queries can be used to check many things, such as:
@@ -304,14 +171,25 @@ In addition to media types, there are also media features.
 Media features provide more specific details to media queries, by allowing to test for a specific feature of the user agent or display device.
 For example, you can apply styles to only those screens that are greater, or smaller, than a certain width.
 
-## CSS Sources
+## Autoscaling Youtube Videos
+By default, YouTube videos do not scale easily between Desktop and Mobile. To fix this, use the following code (placed where the video should be):
+```
+<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+    <iframe style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
+            src="https://youtube.com/embed/your_video_code"
+            allowFullScreen="allowFullScreen">
+    </iframe>
+</div>
+```
+
+# CSS Sources
 * [CSS Tutorial](https://www.w3schools.com/css/default.asp)
 
-## HTML Structures
+# HTML Structures
 This section covers the different code structures that exist in the portfolio webpage. Some are or are not used
 in the actual end-state, this is for reference and to assist in creating future websites.
 
-### Main Tag
+## Main Tag
 The `<main>` tag specifies the main content of a document.
 
 The content inside the `<main>` element should be unique to the document.
@@ -320,7 +198,7 @@ It should not contain any content that is repeated across documents such as side
 Note: There must not be more than one `<main>` element in a document.
 The `<main>` element must NOT be a descendant of an `<article>`, `<aside>`, `<footer>`, `<header>`, or `<nav>` element.
 
-## HTML Example Elements
+# HTML Example Elements
 Some general procedures.
 
 Step 1: Specify Doctype
@@ -450,7 +328,7 @@ Div uses the class:
 </div>
 ```
 
-### Navbar on Small Screens
+## Navbar on Small Screens
 
 ```
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
@@ -464,7 +342,7 @@ Div uses the class:
 </div>
 ```
 
-### Navbar on Bigger Screens
+## Navbar on Bigger Screens
 The `<nav>` tag defines a set of navigation links.
 
 Notice that NOT all links of a document should be inside a `<nav>` element.
@@ -497,7 +375,7 @@ Use `href="#"` to setup in-document navigation. For example, `href="#contact"` w
   </a>
 </nav>
 ```
-### Page Content and Header
+## Page Content and Header
 Specifies the main class and the header. This is where the `Home` button sends the viewer when clicked.
 The string `I'm` is not shown in mobile view. `Sage` is.
 ```
@@ -511,7 +389,7 @@ The string `I'm` is not shown in mobile view. `Sage` is.
   </header>
 ```
 
-### About Section
+## About Section
 ```
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
@@ -558,7 +436,7 @@ The string `I'm` is not shown in mobile view. `Sage` is.
       <i class="fa fa-download"></i> Download Resume
     </button>
 ```
-### Grid for Pricing Tables
+## Grid for Pricing Tables
 ```
       <!-- Grid for pricing tables -->
       <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
@@ -599,7 +477,7 @@ The string `I'm` is not shown in mobile view. `Sage` is.
           <!-- End Grid/Pricing tables -->
 ```
 
-### Testimonials
+## Testimonials
 
 ```
 <!-- Testimonials -->
@@ -612,7 +490,7 @@ The string `I'm` is not shown in mobile view. `Sage` is.
 <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
 <p>No one is better than John Doe.</p>
 ```
-### Portfolio Section
+## Portfolio Section
 ```
   <!-- Portfolio Section -->
   <div class="w3-padding-64 w3-content" id="projects">
@@ -639,7 +517,7 @@ The string `I'm` is not shown in mobile view. `Sage` is.
   </div>
 ```
 
-### Footer
+## Footer
 ```
 <!-- Footer with Social Media Icons -->
 <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
@@ -654,37 +532,37 @@ The string `I'm` is not shown in mobile view. `Sage` is.
 </footer>
 ```
 
-## HTML Global Event Attributes and JavaScript
+# HTML Global Event Attributes and JavaScript
 HTML has the ability to let events trigger actions in a browser, like starting a JavaScript when a user clicks on an element.
 
-### Javascript
+## Javascript
 [JavaScript tutorial](https://www.w3schools.com/js/default.asp).
 
-### Events
+## Events
 Below are the global event attributes that can be added to HTML elements to define event actions.
 [Table of Events](https://www.w3schools.com/tags/ref_eventattributes.asp)
 
-## HTML Sources
+# HTML Sources
 * [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
 * [JavaScript tutorial](https://www.w3schools.com/js/default.asp)
 
-## venv Lightweight Python Virtual Environment
+# venv Lightweight Python Virtual Environment
 Source (check for updates): [venv documentation](https://docs.python.org/3/library/venv.html)
 
 The [venv](https://docs.python.org/3/library/venv.html#module-venv) module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories.
 Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.
 
-### Creating Virtual Environments
+## Creating Virtual Environments
 Useful for running local servers to test web pages!
 
 Creation of virtual environments is done by executing the command `venv`:
 
 ```
-# Linux Version
+### Linux Version
 python3 -m venv /path/to/new/virtual/environment
 ```
 ```
-# Windows Version
+### Windows Version
 python -m venv c:\path\to\myenv
 ```
 
