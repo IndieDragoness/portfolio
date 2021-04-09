@@ -89,10 +89,37 @@
                     using <a href="https://en.wikipedia.org/wiki/Flask_(web_framework)">Flask</a>, and interfaces with <a href="https://azure.microsoft.com/en-us/services/cosmos-db/#featured">Azure Cosmos DB</a> to store data.
                 </b>
             </p>
-            <p>
-                Microsoft, the Microsoft logo and any related
-                marks are trademarks of Microsoft Corporation.
-            </p>
+            <p><b>To build this portfolio webapp, I used the following modules:</b></p>
+            <pre>
+            <code class="language-python">
+                    from flask import Flask, render_template, request, send_file
+                    from azure.cosmos import exceptions, CosmosClient, PartitionKey
+                    from azure.core.exceptions import ResourceExistsError
+                </code>
+            </pre>
+            <p><b>Access the database by creating an instance of container:</b></p>
+            <pre>
+            <code class="language-python">
+                    # Microsoft Azure Cosmos DB Initialization
+                    # Create Cosmos Client
+                    endpoint = "uri_to_database"
+                    key = 'cosmos_db_key'
+                    client = CosmosClient(endpoint, key)
+
+                    database_name = 'name_of_database' # Similar to a 'Database' in MariaDB/PostgreSQL
+                    database = client.get_database_client(database_name)
+
+                    container_name = 'name_of_container' # Similar to a 'Table' in MariaDB/PostgreSQL
+                    container = database.get_container_client(container_name)
+                </code>
+            </pre>
+            <p><b>Now that it's created, we can do simple things like adding (or replacing) an existing piece of data:</b></p>
+            <pre>
+                <code class="language-python">
+                    updated_item = container.upsert_item(item)
+                </code>
+            </pre>
+
         </div>
         <!-- End Summary Section -->
         <!-- Azure Notes -->
@@ -118,6 +145,10 @@
             <!--<i class="fa fa-twitter w3-hover-opacity"></i>-->
             <!--<i class="fa fa-linkedin w3-hover-opacity"></i>-->
             <p class="w3-medium">Powered by Sage and <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+            <p>
+                Microsoft, the Microsoft logo and any related
+                marks are trademarks of Microsoft Corporation.
+            </p>
             <!-- End footer -->
         </footer>
 
