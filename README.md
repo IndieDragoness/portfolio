@@ -3,6 +3,12 @@
 # Table of Contents
 * Quick commands and steps for management: [Quick Reference](#quick-reference)
 * [Summary](#summary)
+  * [Directory Structure](#directory-structure)
+  * [Adding a New Webpage](#adding-a-new-webpage)
+  * [Adding a Download File Button](#adding-a-download-file-button)
+  * [Accessing the Cosmos Database](#accessing-the-cosmos-database)
+  * [Run Web App Locally for Testing](#run-web-app-locally-for-testing)
+  * [Tools Involved in this Project](#tools-involved-in-this-project)
 
 ## Microsoft Azure Specific Sections
 * [Quickstart for Python Flask](#microsoft-azure-quickstart-for-python-flask)
@@ -37,11 +43,6 @@
   * [Testimonials](#testimonials)
   * [Portfolio Section](#portfolio-section)
   * [Footer](#footer)
-
-* [HTML Global Event Attributes and JavaScript](#html-global-event-attributes-and-javaScript)
-  * [Javascript](#javascript)
-  * [Events](#events)
-
 * [HTML Sources](#html-sources)
 
 ## VENV
@@ -66,6 +67,105 @@ When deploying a web app to Azure, Azure creates a `gunicorn` web server to serv
 
 Good reference page is: [Configure a Linux Python app for Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/configure-language-python)
 
+## Directory Structure
+`/app.py` - Where URL's are defined. Returns HTML pages from `templates` folder. Also returns downloads, and interfaces with Cosmos DB.
+
+`/templates` - Where HTML pages are stored.
+
+`/static` - All static files go here, and can be referred to in HTML pages using `static/your_resource`.
+`/static/images` - All `.jpeg` and `.png` go here.
+`/static/documents` - All `.pdf` and other docs go here.
+`/static/styles` - All `.css` go here.
+`/static/favicon.png` - The tiny icon that appears on the tab of the browser.
+`/static/prism.js` - Javascript for PRISM code highlighting.
+
+`/scripts` - Storage folder for additional Python scripts
+`/scripts/__init__.py` - Used to tell Python this directory is a module. Don't put this in `/` home directory.
+`/scripts/utilities.py` - Commonly used, generic functions go here.
+
+`/requirements.txt` - Specifies the packages that the host should have loaded for the web app.
+
+`/record.txt` - Records the App logging output. Custom logging can be added to `app.py` and other python scripts.
+
+## Adding a New Webpage
+All `.html` pages go in `/templates`. To add a new webpage, put it in there and then go to `app.py` and add a 
+new 'reference' link to it so that the web app knows to serve it.
+```
+# Link to linux_project.htm
+@app.route('/linux_project')
+def linux_project():
+    return render_template("linux_project.htm")
+```
+
+## Adding a Download File Button
+First, add the new file to the `/static` folder (preferably in a spot that makes sense organizationally).
+
+Second, make a reference to it in `app.py`. The `app.logger` portion is a custom log note that is added to `record.txt`.
+```
+# Download my RL-PCG Paper
+@app.route('/unity_project/download_rlpcg_paper', methods=['POST'])
+def download_rlpcg_paper():
+    app.logger.info('Paper Download Detected!')
+    return send_file('static/documents/Teaching_RL_PCG_via_Educational_Game.pdf', as_attachment=True)
+```
+
+Third, place the button in the `.html` page.
+```
+<form action="/unity_project/download_rlpcg_paper" method="POST">
+    <button class="w3-button w3-light-grey w3-padding-large w3-section">
+        <i class="fa fa-download"></i> Download My RLPCG Paper
+    </button>
+</form>
+```
+
+## Accessing the Cosmos Database
+Theres several steps to accessing the database.
+
+The first is to have a Database setup in the first place, with a Container in it. 
+This is similar to the Database:Table relationship in MariaDB. When setting up the Container, be sure to add a good partition key
+for the data you will need. For example, the data for the Contact Form on the main page is on the `contact_form` partition.
+Additionally, in `app.py` the initialization is shown below the Azure text block.
+
+Each entry to the Container needs to have a reference to the partition key `contact_form`.
+```
+item = container.read_item(email, partition_key="contact_form")
+```
+
+Second, make sure new entries include the `contact_form` key:value pair, or else they will be excluded.
+
+To create new entries:
+```
+new_entry = {'id': email, 'name': name, 'message': subject + ": " + message, 'portfolio_section': "contact_form"}
+container.create_item(new_entry)
+```
+
+To update an existing entry:
+```
+item["message{}".format(message_count)] = subject + ": " + message
+updated_item = container.upsert_item(item)
+```
+
+## Run Web App Locally for Testing
+See the VENV section for setting up a local environment to test the web app. `requirements.txt` specifies the modules to include,
+such as Azure and Flask.
+
+In Cygwin, to generate the `.venv` folder:
+```
+python3 -m venv /path/to/new/virtual/environment
+```
+
+Cd into the `.venv` folder and execute the following script:
+```
+.venv\Scripts\activate.bat
+```
+
+Now you can start the test server! Just run the following:
+```
+flask run
+```
+
+Note: If you get an error saying the project wasn't found, make sure you are in the same directory as `app.py`.
+
 ## Tools Involved in this Project
 1. Hosting/Cloud: [Microsoft Azure/Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)
 2. Language: [Python 3.6+](https://www.python.org/download/releases/3.0/)
@@ -73,9 +173,10 @@ Good reference page is: [Configure a Linux Python app for Azure App Service](htt
   * Detect if a device is Mobile or Not: [Flask-Mobility](https://flask-mobility.readthedocs.io/en/latest/)
 4. Frontend/Designing the UI/UX: [Adobe XD](https://www.adobe.com/products/xd.html)
   * [Mobile Version Design Video](https://www.youtube.com/watch?v=CORrv-qvfkU)
-5. HTML
+5. HTML Template: [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
 6. CSS
-7. venv for virtual python environments (testing): [venv](https://docs.python.org/3/library/venv.html)
+7. Javascript (Prism)
+8. venv for virtual python environments (testing): [venv](https://docs.python.org/3/library/venv.html)
 
 # Microsoft Azure Quickstart for Python Flask
 * This page came from: [Microsoft Azure Quickstart for Python Flask](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask)
@@ -532,19 +633,8 @@ The string `I'm` is not shown in mobile view. `Sage` is.
 </footer>
 ```
 
-# HTML Global Event Attributes and JavaScript
-HTML has the ability to let events trigger actions in a browser, like starting a JavaScript when a user clicks on an element.
-
-## Javascript
-[JavaScript tutorial](https://www.w3schools.com/js/default.asp).
-
-## Events
-Below are the global event attributes that can be added to HTML elements to define event actions.
-[Table of Events](https://www.w3schools.com/tags/ref_eventattributes.asp)
-
 # HTML Sources
-* [W3 Porfolio Template Reactive Webpage](https://www.w3schools.com/w3css/tryw3css_templates_dark_portfolio.htm)
-* [JavaScript tutorial](https://www.w3schools.com/js/default.asp)
+* 
 
 # PRISM Code Highlighting
 The PRISM CSS and JavaScript files help label code in a beautiful way on the website.
