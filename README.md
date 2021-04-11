@@ -44,7 +44,6 @@
   * [Testimonials](#testimonials)
   * [Portfolio Section](#portfolio-section)
   * [Footer](#footer)
-* [HTML Sources](#html-sources)
 
 ## VENV
 * [venv Lightweight Python Virtual Environment](#venv-lightweight-python-virtual-environment)
@@ -658,9 +657,6 @@ The string `I'm` is not shown in mobile view. `Sage` is.
     <!-- End footer -->
 </footer>
 ```
-
-# HTML Sources
-* 
 
 # PRISM Code Highlighting
 The PRISM CSS and JavaScript files help label code in a beautiful way on the website.
