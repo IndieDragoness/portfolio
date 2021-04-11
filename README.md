@@ -1,4 +1,6 @@
 # Portfolio Website Documentation
+This portfolio website was created so that I could share my work, project, and education history, and to 
+learn Microsoft Azure services (Python Flask Web App, Cosmos Database). Thanks for checking it out!
 
 # Table of Contents
 * Quick commands and steps for management: [Quick Reference](#quick-reference)
