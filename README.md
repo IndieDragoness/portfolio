@@ -74,14 +74,21 @@ Good reference page is: [Configure a Linux Python app for Azure App Service](htt
 `/templates` - Where HTML pages are stored.
 
 `/static` - All static files go here, and can be referred to in HTML pages using `static/your_resource`.
+
 `/static/images` - All `.jpeg` and `.png` go here.
+
 `/static/documents` - All `.pdf` and other docs go here.
+
 `/static/styles` - All `.css` go here.
+
 `/static/favicon.png` - The tiny icon that appears on the tab of the browser.
+
 `/static/prism.js` - Javascript for PRISM code highlighting.
 
 `/scripts` - Storage folder for additional Python scripts
+
 `/scripts/__init__.py` - Used to tell Python this directory is a module. Don't put this in `/` home directory.
+
 `/scripts/utilities.py` - Commonly used, generic functions go here.
 
 `/requirements.txt` - Specifies the packages that the host should have loaded for the web app.
