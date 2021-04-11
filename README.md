@@ -9,6 +9,7 @@
   * [Accessing the Cosmos Database](#accessing-the-cosmos-database)
   * [Run Web App Locally for Testing](#run-web-app-locally-for-testing)
   * [Tools Involved in this Project](#tools-involved-in-this-project)
+  * [Environment Variables](#environment-variables)
 
 ## Microsoft Azure Specific Sections
 * [Quickstart for Python Flask](#microsoft-azure-quickstart-for-python-flask)
@@ -149,22 +150,40 @@ updated_item = container.upsert_item(item)
 See the VENV section for setting up a local environment to test the web app. `requirements.txt` specifies the modules to include,
 such as Azure and Flask.
 
-In Cygwin, to generate the `.venv` folder:
+If running first time on a Windows computer: Using `CMD Prompt`, perform the following from within the `portfolio` directory (the one with app.py). 
 ```
-python3 -m venv /path/to/new/virtual/environment
-```
-
-Cd into the `.venv` folder and execute the following script:
-```
-.venv\Scripts\activate.bat
+py -3 -m venv .venv
+.venv\scripts\activate
+pip install -r requirements.txt
 ```
 
-Now you can start the test server! Just run the following:
+If re-running existing project: Using `CMD Prompt`, perform the following from within the `portfolio` directory (the one with app.py). 
 ```
-flask run
+.venv\scripts\activate
+pip install -r requirements.txt
+```
+
+If running first time on a Linux computer: Using `bash`, perform the following from within the `portfolio` directory (the one with app.py). 
+```
+# Linux systems only
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+If re-running existing project: Using `bash`, perform the following from within the `portfolio` directory (the one with app.py). 
+```
+# Linux systems only
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 Note: If you get an error saying the project wasn't found, make sure you are in the same directory as `app.py`.
+
+## Environment Variables
+Locally, set `.venv` environment variables in `activate.bat` for Windows using the `set` command.
+
+In Azure, set the environment variables in `azure_portal/sages-portfolio/Configuration/Application settings`.
 
 ## Tools Involved in this Project
 1. Hosting/Cloud: [Microsoft Azure/Azure CLI](https://docs.microsoft.com/en-us/cli/azure/)

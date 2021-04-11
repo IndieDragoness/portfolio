@@ -4,6 +4,7 @@ from azure.core.exceptions import ResourceExistsError
 from scripts import utilities
 import logging
 import json
+import os
 
 # ================================== #
 #    _____                                  
@@ -17,14 +18,14 @@ import json
 
 # Microsoft Azure Cosmos DB Initialization
 # Create Cosmos Client
-endpoint = "https://sage-portfolio-app-cosmos-db.documents.azure.com:443/"
-key = '7nRJrStRSOvKyV4VbONqB10qZ2SjOiASCqsjNWa3CXMs8tabxOvl2o68MN4A7FJ9P20TfPsR7zMpIym0Zm7tUA=='
+endpoint = os.environ["COSMOS_DATABASE_ENDPOINT"]
+key = os.environ["COSMOS_DATABASE_KEY"]
 client = CosmosClient(endpoint, key)
 
-database_name = 'Portfolio_DB'
+database_name = os.environ["COSMOS_DATABASE_NAME"]
 database = client.get_database_client(database_name)
 
-container_name = 'Portfolio_Container'
+container_name = os.environ["COSMOS_CONTAINER_NAME"]
 container = database.get_container_client(container_name)
 
 # ================================== #
